@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Promoção Especial</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #000;
+    color: #fff;
+}
+
+/* HEADLINE */
+header {
+    text-align: center;
+    padding: 30px 10px;
+    background: #b00000;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* SUBHEADLINE */
+.sub {
+    text-align: center;
+    font-size: 18px;
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+
+/* CONTADOR ONLINE COM PONTO VERDE */
+.online-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.online-counter .dot {
+    width: 12px;
+    height: 12px;
+    background: #00ff00;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.4); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.7; }
+}
+
+.online-number {
+    display: inline-block;
+    min-width: 140px;
+    text-align: left;
+}
+
+/* PREÇO */
+.preco {
+    text-align: center;
+    background: #111;
+    padding: 15px;
+    font-size: 22px;
+    border-left: 4px solid #b00000;
+    border-right: 4px solid #b00000;
+    width: 70%;
+    margin: 0 auto 25px auto;
+    border-radius: 6px;
+}
+
+/* VIDEOS */
+.content-box {
+    width: 92%;
+    max-width: 800px;
+    margin: auto;
+    background: #111;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+    border: 2px solid #b00000;
+}
+
+video {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background: #000;
+}
+
+/* DESCRIÇÃO DEBAIXO DOS VÍDEOS */
+.descricao {
+    background: rgba(255, 0, 0, 0.15);
+    border-left: 3px solid #ff0000;
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    line-height: 1.45;
+    color: #ffcccc;
+}
+
+/* BOTÕES */
+.btn {
+    text-decoration: none;
+    background: #b00000;
+    color: #fff;
+    padding: 15px 25px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 220px;
+    margin: 20px auto;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.btn img {
+    height: 22px;
+}
+
+.btn:hover {
+    background: #ff0000;
+}
+
+.buy-all {
+    background: #ff0000;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 260px;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 40px auto;
+}
+
+.buy-all:hover {
+    background: #b00000;
+}
+
+.fotos-final {
+    width: 92%;
+    max-width: 900px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.fotos-final img {
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid #b00000;
+}
+
+.suporte {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.telegram-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 230px;
+    padding: 12px;
+    background: #0088cc;
+    color: #fff;
+    border-radius: 8px;
+    margin: 15px auto 40px auto;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.telegram-btn img {
+    width: 30px;
+    margin-right: 10px;
+}
+
+/* NOTIFICAÇÕES */
+.notificacao {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #111;
+    border-left: 4px solid #ff0000;
+    padding: 10px 14px;
+    border-radius: 6px;
+    min-width: 210px;
+    font-size: 14px;
+    opacity: 0;
+    animation: notif 30s infinite;
+}
+
+@keyframes notif {
+    0% { opacity: 0; }
+    5% { opacity: 1; }
+    15% { opacity: 1; }
+    20% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.notificacao::after {
+    animation: texto 30s infinite;
+    content: "Gh bought now for $45";
+}
+
+@keyframes texto {
+    0% { content: "CP 1 It Was Bought For $35"; }
+    33% { content: "MOM AND SON It Was Bought For 40$"; }
+    66% { content: "ALL CONTENT WAS PURCHASED FOR $145"; }
+    100% { content: "TEENS Was Bought For Just 30$."; }
+}
+
+/* AVISO CUSTOMIZADO DE SAÍDA */
+#exit-alert {
+    display: none;
+    position: fixed;
+    top: 0; left:0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95);
+    z-index: 9999;
+    color: #fff;
+    text-align: center;
+    padding-top: 100px;
+    font-size: 18px;
+}
+
+#exit-alert .alert-icon {
+    font-size: 50px;
+    color: #ff0000;
+    margin-bottom: 20px;
+}
+
+#exit-alert .alert-text {
+    font-size: 20px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+#exit-alert .btn-exit {
+    background: #ff0000;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#exit-alert .btn-exit:hover {
+    background: #b00000;
+}
+
+/* small screens adjustments */
+@media (max-width:640px){
+  .online-number{min-width:120px}
+  .btn, .buy-all{width:90%}
+  .content-box{width:96%}
+}
+</style>
+
+<script>
+/* SIMULA NÚMEROS ONLINE (em inglês) */
+document.addEventListener('DOMContentLoaded', () => {
+    const numberElement = document.querySelector('.online-number');
+    const base = 178;
+    // array of offsets to make motion feel natural (more variety)
+    const offsets = [0,1,-1,2,-2,3,-3,0,2,-1];
+    let i = 0;
+    numberElement.textContent = base + offsets[i] + " people online now";
+    setInterval(() => {
+        i = (i + 1) % offsets.length;
+        const val = base + offsets[i];
+        numberElement.textContent = val + " people online now";
+    }, 1200);
+});
+
+/* AVISO DE SAÍDA - exibe ô modal customizado e impede saída temporariamente.
+   Nota: navegadores ainda exibem diálogo nativo em algumas situações. */
+window.onbeforeunload = function(e) {
+    // Show our custom modal overlay
+    document.getElementById('exit-alert').style.display = 'block';
+    // standard message for older browsers (won't display custom text in modern browsers)
+    e.preventDefault();
+    e.returnValue = '';
+    return '';
+};
+
+function continuarSite() {
+    // hide modal and let visitor continue; prevent unload
+    document.getElementById('exit-alert').style.display = 'none';
+}
+</script>
+</head>
+<body>
+
+<header>🔥CONTENT UPDATED 04-05-2026🔥</header>
+<p class="sub"></p>
+
+<!-- CONTADOR ONLINE (EM INGLÊS) -->
+<div class="online-counter">
+    <div class="dot" aria-hidden="true"></div>
+    <div class="online-number">178 people online now</div>
+</div>
+
+<!-- NOTIFICAÇÃO (pequena, top-right) -->
+<div class="notificacao" aria-hidden="true"></div>
+
+<!-- 10 CONTEÚDOS -->
+<div id="conteudos">
+
+<div class="content-box">
+    <div class="preco">CP 2026 — $35</div>
+    <video controls src="https://files.catbox.moe/9mv5wy.mp4"></video>
+    <video controls src="https://files.catbox.moe/rw2k92.mov"></video>
+    <div class="descricao">
+  • NEW CP 4 2026 UPDATE<br>
+  • 40GB Mega Folder<br>
+  • Full Vidios 
+</div>
+   <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">FATHER AND DAUGHTER — $35</div>
+    <video controls src="https://files.catbox.moe/5a40cp.mp4"></video>
+    <video controls src="https://files.catbox.moe/0gb24w.mp4"></video>
+    <div class="descricao">
+  • Fresh exclusive<br>
+  • 14GB<br>
+  • FATHER AND DAUGHTER
+</div>
+    <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+<div class="content-box">
+    <div class="preco">MOM AND SON — $35</div>
+    <video controls src="https://files.catbox.moe/bt4od6.mp4"></video>
+    <video controls src="https://files.catbox.moe/lxpskg.mp4"></video>
+    <div class="descricao">
+  • Fresh Content And Exclusive<br>
+  • 16GB<br>
+  • Packs on Mega
+</div>
+     <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">CP Premium $35</div>
+    <video controls src="https://files.catbox.moe/ky4o23.mp4"></video>
+    <video controls src="https://files.catbox.moe/gpv00y.mp4"></video>
+    <div class="descricao">
+  • New Packs and premium<br>
+  • 19GB Mega Folder<br>
+  • New Contents
+</div>
+  <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">CP POOL — $35</div>
+    <video controls src="https://files.catbox.moe/ydgsd9.MP4"></video>
+    <video controls src="https://files.catbox.moe/mcpjfs.MP4"></video>
+    <div class="descricao">
+  • Exclusive content<br>
+  • 8GB<br>
+  • CP POOL
+</div>
+    <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">CP GAY — $35</div>
+    <video controls src="https://files.catbox.moe/iqukgd.mp4"></video>
+    <video controls src="https://files.catbox.moe/3uhd6j.mp4"></video>
+    <div class="descricao">
+  • FRESH CONTENT<br>
+  • 16GB<br>
+  • Boys CP
+</div>
+   <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">BLOWJOB CP — $35</div>
+    <video controls src="https://files.catbox.moe/btdnqd.mp4"></video>
+    <video controls src="https://files.catbox.moe/nxz3xc.mp4"></video>
+    <div class="descricao">
+  • Exclusive content<br>
+  • 20GB<br>
+  • BLOWJOB CP
+</div>
+    <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">FORCED CP — $35</div>
+    <video controls src="https://files.catbox.moe/j1tipv.mp4"></video>
+    <video controls src="https://files.catbox.moe/5cmcqx.mp4"></video>
+    <div class="descricao">
+  • Full Contents<br>
+  • 15GB<br>
+  • Real FORCED CP
+</div>
+     <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">REAL INCEST — $35</div>
+    <video controls src="https://files.catbox.moe/fb0x4u.mp4"></video>
+    <video controls src="https://files.catbox.moe/9trek6.mp4"></video>
+    <div class="descricao">
+  • Private Content<br>
+  • 15GB<br>
+  • Full Packs
+</div>
+     <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">EXCLUSIVE CP — $35</div>
+    <video controls src="https://files.catbox.moe/wrz76l.mp4"></video>
+    <video controls src="https://files.catbox.moe/j31ce3.mp4"></video>
+    <div class="descricao">
+  • Rare Contents 2026<br>
+  • 18GB<br>
+  • EXCLUSIVE
+</div>
+   <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">RARE CP — $35</div>
+    <video controls src="https://files.catbox.moe/nai237.mp4"></video>
+    <video controls src="https://files.catbox.moe/dgxtyl.mp4"></video>
+    <div class="descricao">
+  • New Vidios<br>
+  • 16GB<br>
+  • RARE CONTENT
+</div>
+   <a href="https://abre.ai/rarepct" class="btn">
+    GET NOW
+    <img src="https://cutt.ly/OtZ08RMV" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">FOOT CP — $35</div>
+    <video controls src="https://files.catbox.moe/deydj9.mp4"></video>
+    <video controls src="https://files.catbox.moe/s3l34c.mp4"></video>
+    <div class="descricao">
+  • Fresh Content<br>
+  • 14GB<br>
+  • FOOT CP
+</div>
+    <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">CP COLLETION — $60</div>
+    <video controls src="https://files.catbox.moe/ilvvab.mp4"></video>
+    <video controls src="https://files.catbox.moe/ng5jh8.mp4"></video>
+    <div class="descricao">
+  • CP NEW Upgrad<br>
+  • 54GB<br>
+  • New content and Exclusive
+</div>
+   <a href="https://cutt.ly/VtZ04Rga" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">NEW TEENS 1 — $35</div>
+    <video controls src="https://files.catbox.moe/n35rpe.mov"></video>
+    <video controls src="https://files.catbox.moe/s7gxkb.mov"></video>
+    <div class="descricao">
+  • Full Packs<br>
+  • 17GB<br>
+  • Rare Content
+</div>
+     <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">TEENS LEAKS — $35</div>
+    <video controls src="https://files.catbox.moe/x3vsgo.mp4"></video>
+    <video controls src="https://files.catbox.moe/dpe90r.mp4"></video>
+    <div class="descricao">
+  • FUll PACKS<br>
+  • High-quality<br>
+  • 28GB
+</div>
+   <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">NEW TEENS 3 — $35</div>
+    <video controls src="https://files.catbox.moe/wgr2v5.mov"></video>
+    <video controls src="https://files.catbox.moe/o0cl4l.mp4"></video>
+    <div class="descricao">
+  • Private Content<br>
+  • 13GB<br>
+  • Full Vidios
+</div>
+    <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">BLACK TEENS — $35</div>
+    <video controls src="https://files.catbox.moe/rx6mh5.mov"></video>
+    <video controls src="https://files.catbox.moe/co7k87.mp4"></video>
+    <div class="descricao">
+  • Exclusive Content<br>
+  • 13GB<br>
+  • BLACK CONTENTS
+</div>
+   <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">NEW TEENS 4 — $35</div>
+    <video controls src="https://files.catbox.moe/xsrk9l.mov"></video>
+    <video controls src="https://files.catbox.moe/4wwixy.mov"></video>
+    <div class="descricao">
+  • Rare Teens<br>
+  • 18GB<br>
+  • NEW Teens 4 
+</div>
+   <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">FORCED — $35</div>
+    <video controls src="https://files.catbox.moe/7k99vb.mp4"></video>
+    <video controls src="https://files.catbox.moe/lsy0f4.mp4"></video>
+    <div class="descricao">
+  • Ugrad 2026<br>
+  • 17GB<br>
+  • New Folder
+</div>
+    <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">Rape — $35</div>
+    <video controls src="https://files.catbox.moe/lucpn4.mp4"></video>
+    <video controls src="https://files.catbox.moe/83ilmr.mp4"></video>
+    <div class="descricao">
+  • Rare packs<br>
+  • 14GB<br>
+  • New Packs
+</div>
+     <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">SNAPGOD FULL — $35</div>
+    <video controls src="https://files.catbox.moe/wc2oh1.mp4"></video>
+    <video controls src="https://files.catbox.moe/5zi2jq.mp4"></video>
+    <div class="descricao">
+  • FRESH CONTENT<br>
+  • 500GB<br>
+  • FULL PACKS
+</div>
+     <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">BLACKMAIL — $35</div>
+    <video controls src="https://files.catbox.moe/elxyfz.mov"></video>
+    <video controls src="https://files.catbox.moe/6wbe94.mov"></video>
+    <div class="descricao">
+  • BLACK CONTENTS<br>
+  • 17GB<br>
+  • FRESH PACKS
+</div>
+     <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<div class="content-box">
+    <div class="preco">HIGH SCHOOL — $35</div>
+    <video controls src="https://files.catbox.moe/wryhms.mp4"></video>
+    <video controls src="https://files.catbox.moe/hr6ejc.mp4"></video>
+    <div class="descricao">
+  • EXCLUSIVE<br>
+  • 20GB<br>
+  • NEW FOLDER
+</div>
+     <a href="https://cutt.ly/OtZ08RMV" class="btn">
+    GET NOW
+    <img src="https://files.catbox.moe/mnlshc.png" alt="Mega Logo">
+</a>
+</div>
+
+<!-- BOTÃO DE COMPRAR TUDO CENTRALIZADO -->
+<div style="text-align:center;">
+  <a href="https://cutt.ly/otZ07q0D" class="buy-all">ALL CONTENT $160</a>
+</div>
+
+
+</body>
+</html>
